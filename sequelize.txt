@@ -12,7 +12,6 @@ Undoing Migrations
 npx sequelize-cli db:migrate:undo
 
 
-
 Simple INSERT queries
 First, a simple example:
 
@@ -24,3 +23,21 @@ console.log("Jane's auto-generated ID:", jane.id);
 const users = await User.findAll();
 console.log(users.every(user => user instanceof User)); // true
 console.log("All users:", JSON.stringify(users, null, 2));
+
+
+Creating the first Seed
+npx sequelize-cli seed:generate --name demo-user
+
+Running Seeds
+npx sequelize-cli db:seed:all
+
+Undoing Seeds
+If you wish to undo the most recent seed
+
+npx sequelize-cli db:seed:undo
+If you wish to undo a specific seed:
+
+npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data
+If you wish to undo all seeds:
+
+npx sequelize-cli db:seed:undo:all

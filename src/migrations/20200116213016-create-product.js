@@ -22,10 +22,10 @@ module.exports = {
       },
       categoryId: {
         allowNull: false,
-        references: {
-          model: 'Categories',
-          key: 'id'
-        },
+        type: Sequelize.INTEGER
+      },
+      userId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {

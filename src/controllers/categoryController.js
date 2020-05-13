@@ -1,15 +1,12 @@
-import { Router } from 'express';
-import { Category, Product } from '../models';
-let router = Router();
+import { Product, Category } from '../models';
 
-router.get('', async (req, res) => {
-  const categories = await Category.findAll({
-    include: Product
-  });
+
+export const getAllCategories = async (req, res) => {
+  const categories = await Category.findAll();
   res.json({ categories });
-});
+};
 
-router.post('/create', async (req, res) => {
+export const create = async (req, res) => {
   const { name } = req.body;
   await Category.create({
     name: name
@@ -17,9 +14,9 @@ router.post('/create', async (req, res) => {
   res.json({
     success: 'Category created'
   });
-});
+};
 
-router.put('/:id/edit', async (req, res) => {
+export const edit = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
@@ -33,9 +30,9 @@ router.put('/:id/edit', async (req, res) => {
     success: 'Category updated'
   });
 
-});
+};
 
-router.delete('/:id/delete', async (req, res) => {
+export const deleteCategory =  async (req, res) => {
   const { id } = req.params;
 
   await Category.destroy({
@@ -43,6 +40,15 @@ router.delete('/:id/delete', async (req, res) => {
       id: id
     }
   });
-});
 
-export default router;
+  res.json({
+    success: 'Category deleted'
+  });
+};
+
+export default {
+  getAllCategories,
+  create,
+  edit,
+  deleteCategory
+}

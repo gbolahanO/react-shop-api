@@ -1,21 +1,11 @@
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser'
+require('dotenv').config({ path: './variables.env' });
 
-/*
- mongodb connection
-import db from '../db';
-b.on('error', console.error.bind(console, 'connection error'));
-db.on('error', () => {
-  console.log("connection error!");
-});
-db.once('open', () => {
-  console.log("we're connected!");
-}) */
-
-import user from '../routes/user';
-import product from '../routes/product';
-import category from '../routes/category';
+import userRouter from './routes/user';
+import productRouter from './routes/product';
+import categoryRouter from './routes/category';
 
 const app = express();
 
@@ -30,12 +20,14 @@ app.get('/', (req, res) => {
   });
 })
 
-app.use('/v1/user', user);
-app.use('/v1/product', product);
-app.use('/v1/category', category);
+app.use('/v1/users', userRouter);
+app.use('/v1/products', productRouter);
+app.use('/v1/categories', categoryRouter);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 server.listen(port, () => {
-  console.log("server started on localhost:3000")
-})
+  console.log("server started on localhost:5000")
+});
+
+export { app };

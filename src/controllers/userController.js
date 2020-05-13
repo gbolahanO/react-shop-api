@@ -1,15 +1,13 @@
-import { Router } from 'express';
 import { User } from '../models';
 import { hashSync, genSaltSync, compareSync } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-let router = Router();
 
-router.get('', async (req, res) => {
+const getAllUsers = async (req, res) => {
   const users = await User.findAll();
   res.json({ users });
-});
+}
 
-router.post('/create', async (req, res) => {
+const signup = async (req, res) => {
   const { name, password, email } = req.body;
 
   const salt = genSaltSync(10);
@@ -22,9 +20,9 @@ router.post('/create', async (req, res) => {
   res.json({
     success: 'User created'
   });
-});
+}
 
-router.post('/login', async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body
 
   const user = await User.findOne({
@@ -48,7 +46,7 @@ router.post('/login', async (req, res) => {
     email: user.email
   }
   const token = sign(data, 'secret', {
-    expiresIn: '24'
+    expiresIn: '24h'
   });
 
   res.send({
@@ -56,6 +54,10 @@ router.post('/login', async (req, res) => {
     token
   });
 
-})
+}
 
-export default router;
+export default {
+  getAllUsers,
+  signup,
+  login
+}

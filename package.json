@@ -1,12 +1,18 @@
 {
-  "name": "node_scaffold",
+  "name": "zenon",
   "version": "1.0.0",
-  "description": "node scaffold with ES6, ES7, ES8 and beyond",
-  "main": "src/server.js",
+  "description": "Zenon e-commerce api",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "babel-node": "babel-node --presets=preset-env",
-    "start": "nodemon --exec babel-node src/server.js"
+    "start:dev": "nodemon --exec babel-node src/server.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -14,10 +20,13 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.7",
     "mysql2": "^2.1.0",
+    "nodemailer": "^6.4.6",
     "nodemon": "^2.0.2",
     "sequelize": "^5.21.3"
   },
@@ -25,6 +34,9 @@
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
-    "sequelize-cli": "^5.5.1"
+    "cross-env": "^7.0.2",
+    "jest": "^26.0.1",
+    "sequelize-cli": "^5.5.1",
+    "supertest": "^4.0.2"
   }
 }
